@@ -1,0 +1,144 @@
+@use 'tokens' as *;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: $c-white;
+}
+
+.page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 $page-gutter 4px;
+}
+
+/* ---------- header ---------- */
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 24px 0 26px;
+}
+
+.eyebrow {
+  @include eyebrow;
+  margin: 0 0 9px;
+  letter-spacing: 0.34em;
+}
+
+.display {
+  margin: 0;
+  font-size: $fs-display;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: $c-ink;
+}
+
+.toolbar {
+  flex: 0 1 747px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px 124px;
+  gap: 26px;
+  margin-bottom: 2px;
+}
+
+/* ---------- two columns ---------- */
+.columns {
+  display: grid;
+  grid-template-columns: 31.4% minmax(0, 1fr);
+  align-items: start;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.explorer {
+  align-self: stretch;
+  border-right: 1px solid $c-line;
+  padding-bottom: 24px;
+}
+
+.preview {
+  padding: 0 0 26px 14px;
+  min-width: 0;
+}
+
+/* ---------- laptop ---------- */
+@media (max-width: $bp-laptop) {
+  .display {
+    font-size: 48px;
+  }
+  .toolbar {
+    flex-basis: 620px;
+    gap: 14px;
+  }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: $bp-tablet) {
+  .page {
+    padding: 0 24px;
+  }
+  .head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .display {
+    font-size: 42px;
+  }
+  .toolbar {
+    flex: none;
+    grid-template-columns: minmax(0, 1fr) 120px 112px;
+    gap: 10px;
+  }
+  .columns {
+    grid-template-columns: 290px minmax(0, 1fr);
+  }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: $bp-mobile) {
+  .page {
+    padding: 0 16px;
+  }
+  .head {
+    padding: 22px 0 18px;
+    gap: 16px;
+  }
+  .eyebrow {
+    font-size: 11px;
+  }
+  .display {
+    font-size: 34px;
+  }
+  .toolbar {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+
+    rg-model-search {
+      grid-column: 1 / -1;
+    }
+  }
+  // Sort panel anchors to the right edge on small screens
+  .tool-filter {
+    min-width: 0;
+  }
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .explorer {
+    border-right: 0;
+    padding-bottom: 18px;
+  }
+  .preview {
+    padding: 0 0 20px;
+  }
+  // full-bleed hero on phones
+  .preview rg-model-gallery {
+    margin: 0 -16px;
+  }
+}

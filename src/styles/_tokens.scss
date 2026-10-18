@@ -1,0 +1,60 @@
+// RevGate design tokens — measured against the 1440px reference.
+$font-sans: 'Inter Variable', 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+
+$c-ink: #0d0d0d;
+$c-text: #1a1a1a;
+$c-muted: #7a7a7a;
+$c-subtle: #5c5c5c;
+$c-line: #dcdcdc;
+$c-line-strong: #a8a8a8;
+$c-chip: #ececec;
+$c-row-active: #f2f2f2;
+$c-white: #ffffff;
+$c-nav-top: #2b2c2e;
+$c-nav-bottom: #4a4b4d;
+
+$page-gutter: 36px;
+$nav-height: 58px;
+$radius: 2px;
+
+$fs-eyebrow: 12px;
+$fs-display: 56px;
+$fs-title: 36px;
+$fs-row-name: 18px;
+$fs-body: 16px;
+$fs-control: 15px;
+$fs-label: 13px;
+
+$tracking-eyebrow: 0.32em;
+$ease: cubic-bezier(0.2, 0, 0, 1);
+$dur: 260ms;
+
+$bp-laptop: 1439px;
+$bp-tablet: 1023px;
+$bp-mobile: 767px;
+
+@mixin eyebrow {
+  font-size: $fs-eyebrow;
+  font-weight: 600;
+  letter-spacing: $tracking-eyebrow;
+  text-transform: uppercase;
+  color: $c-subtle;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $c-ink;
+    outline-offset: 2px;
+  }
+}
+
+@mixin reset-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}

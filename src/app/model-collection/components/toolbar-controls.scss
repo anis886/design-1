@@ -1,0 +1,196 @@
+@use 'tokens' as *;
+
+:host {
+  position: relative;
+  display: block;
+  font-size: $fs-control;
+}
+
+/* ---- search ---- */
+.search-field {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px 0 17px;
+  border: 1px solid $c-line-strong;
+  border-radius: $radius;
+  background: $c-white;
+  color: $c-ink;
+  transition: border-color $dur $ease;
+
+  &:focus-within {
+    border-color: $c-ink;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    font-size: $fs-control;
+    color: $c-text;
+
+    &::placeholder {
+      color: #6e6e6e;
+    }
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+}
+
+.clear {
+  @include reset-button;
+  @include focus-ring;
+  display: inline-flex;
+  color: $c-muted;
+}
+
+/* ---- dropdown trigger ---- */
+.control {
+  @include reset-button;
+  @include focus-ring;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  border: 1px solid $c-line-strong;
+  border-radius: $radius;
+  background: $c-white;
+  color: $c-ink;
+  font-size: $fs-control + 1;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: border-color $dur $ease, background-color $dur $ease;
+
+  &:hover,
+  &[aria-expanded='true'] {
+    border-color: $c-ink;
+  }
+
+  .chev {
+    margin-left: auto;
+    padding-left: 6px;
+    box-sizing: content-box;
+    transition: transform $dur $ease;
+  }
+  &[aria-expanded='true'] .chev {
+    transform: rotate(180deg);
+  }
+}
+
+.badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: $c-ink;
+  color: $c-white;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* ---- panel ---- */
+.panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  min-width: 220px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: $c-white;
+  border: 1px solid $c-line-strong;
+  border-radius: $radius;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 200ms $ease, transform 200ms $ease, visibility 0s linear 200ms;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 200ms $ease, transform 200ms $ease;
+  }
+
+  &--end {
+    left: auto;
+    right: 0;
+  }
+}
+
+fieldset {
+  border: 0;
+  margin: 0 0 6px;
+  padding: 0;
+}
+
+legend {
+  @include eyebrow;
+  font-size: 11px;
+  padding: 8px 8px 6px;
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 8px;
+  cursor: pointer;
+  border-radius: $radius;
+  font-size: $fs-control;
+  transition: background-color 200ms $ease;
+  @include focus-ring;
+
+  &:hover {
+    background: $c-row-active;
+  }
+
+  input {
+    accent-color: $c-ink;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  &--sort {
+    justify-content: space-between;
+    &[aria-selected='true'] {
+      font-weight: 600;
+    }
+  }
+}
+
+.reset {
+  @include reset-button;
+  @include focus-ring;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 8px;
+  border-top: 1px solid $c-line;
+  text-align: left;
+  font-size: $fs-label + 1;
+  text-decoration: underline;
+
+  &:disabled {
+    color: $c-line-strong;
+    text-decoration: none;
+    cursor: default;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .search-field,
+  .control {
+    height: 46px;
+  }
+}

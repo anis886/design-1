@@ -1,0 +1,29 @@
+<rg-top-nav [fallback]="backRoute()" />
+
+<main class="page">
+  <header class="head">
+    <div class="titles">
+      <p class="eyebrow">Model collection</p>
+      <h1 class="display">Find your {{ store.collection()?.brand }}.</h1>
+    </div>
+
+    <div class="toolbar" role="search">
+      <rg-model-search [value]="store.query()" (changed)="store.setQuery($event)" />
+      <rg-model-filter class="tool-filter" />
+      <rg-model-sort class="tool-sort" />
+    </div>
+  </header>
+
+  <div class="columns">
+    <aside class="explorer" aria-label="Model explorer">
+      <rg-model-sidebar />
+    </aside>
+
+    <section class="preview" aria-label="Selected model">
+      <rg-model-gallery />
+      <rg-model-information />
+    </section>
+  </div>
+
+  <rg-model-navigation />
+</main>

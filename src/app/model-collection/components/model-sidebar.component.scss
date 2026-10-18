@@ -1,0 +1,130 @@
+@use 'tokens' as *;
+
+:host {
+  display: block;
+  isolation: isolate;
+}
+
+.eyebrow {
+  @include eyebrow;
+  margin: 13px 0 22px;
+  color: $c-ink;
+  letter-spacing: 0.34em;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.tab {
+  @include reset-button;
+  @include focus-ring;
+  height: 38px;
+  min-width: 80px;
+  padding: 0 20px;
+  border-radius: $radius;
+  background: $c-chip;
+  color: $c-text;
+  font-size: $fs-control;
+  font-weight: 500;
+  transition: background-color $dur $ease, color $dur $ease;
+
+  &:hover:not(.on) {
+    background: #e0e0e0;
+  }
+
+  &.on {
+    background: $c-ink;
+    color: $c-white;
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid $c-line;
+  margin-right: 24px;
+
+  li {
+    animation: rg-row-in 280ms $ease both;
+  }
+}
+
+.empty {
+  padding: 40px 0;
+  border-top: 1px solid $c-line;
+  color: $c-muted;
+
+  p {
+    margin: 0 0 12px;
+  }
+  button {
+    @include reset-button;
+    @include focus-ring;
+    color: $c-ink;
+    text-decoration: underline;
+  }
+}
+
+@keyframes rg-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (max-width: $bp-laptop) {
+  .tabs {
+    gap: 8px;
+  }
+  .tab {
+    min-width: 0;
+    padding: 0 16px;
+  }
+  .list {
+    margin-right: 16px;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .tab {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  .list {
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .eyebrow {
+    margin: 0 0 14px;
+  }
+  .tabs {
+    margin-bottom: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab {
+    flex: none;
+  }
+  .list {
+    display: flex;
+    gap: 10px;
+    margin: 0 -16px;
+    padding: 2px 16px 6px;
+    border-top: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    li {
+      flex: none;
+      scroll-snap-align: start;
+    }
+  }
+}

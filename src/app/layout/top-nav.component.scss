@@ -1,0 +1,64 @@
+@use 'tokens' as *;
+
+:host {
+  display: block;
+}
+
+.bar {
+  height: $nav-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $page-gutter;
+  background: linear-gradient(180deg, $c-nav-bottom 0%, $c-nav-top 100%);
+  color: $c-white;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.icon-btn,
+.back {
+  @include reset-button;
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  color: $c-white;
+}
+
+.logo {
+  @include focus-ring;
+  color: $c-white;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.back {
+  gap: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: opacity $dur $ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .bar {
+    padding: 0 16px;
+    height: 52px;
+  }
+  .left {
+    gap: 18px;
+  }
+  .logo {
+    font-size: 16px;
+  }
+}

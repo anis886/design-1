@@ -1,0 +1,189 @@
+@use 'tokens' as *;
+
+:host {
+  display: block;
+}
+
+.row {
+  @include reset-button;
+  @include focus-ring;
+  position: relative;
+  width: 100%;
+  height: 103px;
+  display: grid;
+  grid-template-columns: 39px 124px 1fr 20px;
+  align-items: center;
+  column-gap: 0;
+  padding: 0 4px 0 0;
+  text-align: left;
+  border-bottom: 1px solid $c-line;
+  transition: background-color $dur $ease;
+
+  // selected/hovered background bleeds slightly past the list edges, as in the reference
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 -8px -1px -16px;
+    background: $c-row-active;
+    opacity: 0;
+    transition: opacity $dur $ease;
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    bottom: -1px;
+    width: 3px;
+    background: $c-ink;
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform $dur $ease;
+  }
+
+  &:hover::before {
+    opacity: 0.55;
+  }
+  &.active::before {
+    opacity: 1;
+  }
+  &.active::after {
+    transform: scaleY(1);
+  }
+
+  &:hover .arrow,
+  &.active .arrow {
+    transform: translateX(3px);
+  }
+}
+
+.idx {
+  font-size: $fs-body;
+  color: $c-subtle;
+  font-variant-numeric: tabular-nums;
+}
+
+.thumb {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 124px;
+    height: auto;
+    max-height: 64px;
+    object-fit: contain;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 26px;
+  min-width: 0;
+}
+
+.name {
+  font-size: $fs-row-name;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: $c-ink;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.body {
+  font-size: $fs-body;
+  color: $c-muted;
+}
+
+.arrow {
+  color: $c-ink;
+  transition: transform $dur $ease;
+}
+
+@media (max-width: $bp-laptop) {
+  .row {
+    grid-template-columns: 32px 104px 1fr 20px;
+  }
+  .thumb img {
+    width: 104px;
+  }
+  .text {
+    padding-left: 18px;
+  }
+  .name {
+    font-size: 16px;
+  }
+  .body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .row {
+    height: 84px;
+    grid-template-columns: 26px 84px 1fr 18px;
+  }
+  .thumb img {
+    width: 84px;
+  }
+  .text {
+    padding-left: 12px;
+    gap: 3px;
+  }
+  .name {
+    font-size: 14px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .body {
+    font-size: 13px;
+  }
+}
+
+/* Mobile: compact horizontally scrolling cards */
+@media (max-width: $bp-mobile) {
+  .row {
+    width: 156px;
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 64px auto;
+    row-gap: 6px;
+    padding: 12px;
+    border: 1px solid $c-line;
+    &::before {
+      inset: 0;
+    }
+    &::after {
+      left: 0;
+      right: 0;
+      top: auto;
+      bottom: 0;
+      width: auto;
+      height: 3px;
+      transform: scaleX(0);
+    }
+    &.active::after {
+      transform: scaleX(1);
+    }
+  }
+  .idx {
+    font-size: 12px;
+  }
+  .thumb img {
+    width: 120px;
+  }
+  .text {
+    padding-left: 0;
+  }
+  .arrow {
+    display: none;
+  }
+}
